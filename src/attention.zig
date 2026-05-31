@@ -66,7 +66,7 @@ pub const KVCache = struct {
             var scores = [_]f32{0} ** 8192;
             var pos: u32 = 0;
             while (pos < max_pos) : (pos += 1) {
-                const k_off = cache.kvOffset(cache, spec, 0, pos);
+                const k_off = cache.kvOffset(spec, 0, pos);
                 var score: f32 = 0;
                 var d: u32 = 0;
                 while (d < head_dim) : (d += 1) {
@@ -88,7 +88,7 @@ pub const KVCache = struct {
             // Weighted sum of values
             pos = 0;
             while (pos < max_pos) : (pos += 1) {
-                const v_off = cache.kvOffset(cache, spec, 0, pos);
+                const v_off = cache.kvOffset(spec, 0, pos);
                 const attn = scores[pos] / sum_exp;
                 var d2: u32 = 0;
                 while (d2 < head_dim) : (d2 += 1) {
